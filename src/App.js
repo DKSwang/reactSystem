@@ -2,7 +2,7 @@
  * @Author: xxuzhong.wang
  * @Date: 2021-07-16 15:52:09
  * @LastEditors: xuzhong.wang
- * @LastEditTime: 2021-08-05 14:50:29
+ * @LastEditTime: 2021-08-06 09:59:21
  * @Description: 
  */
 import React from "react"
@@ -12,6 +12,14 @@ import './App.css';
 import { Button } from 'antd-mobile';
 import 'antd-mobile/dist/antd-mobile.css'; 
 
+
+//使用装饰器改造
+@connect(
+    //第一个参数=>你要state的什么属性放到props里
+    state=>({num:state  }),
+    //第二个参数 =>你要执行什么方法
+    {AddCounter,DelCounter,asyncADD}
+    )
 
 class App extends React.Component {
     constructor(props){
@@ -28,13 +36,5 @@ class App extends React.Component {
       )
     }
 }
-//单纯的读取redux的数据
-const mapStateToProps = (state) =>{
-    console.log(state) 
-    return{
-      num:state  
-    }
-  }
-  const actionCreators = {AddCounter,DelCounter,asyncADD}
-App=  connect(mapStateToProps,actionCreators)(App)
+
 export default App;
